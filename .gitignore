@@ -1,7 +1,8 @@
+__pycache__
 .ipynb_checkpoints/
-election_analysis/
+election_analysis_env/
 images.ipynb
 unstorted/
 train_images/
-
-
+unsorted/
+web/db.sqlite3
