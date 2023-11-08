@@ -6,3 +6,5 @@ unstorted/
 train_images/
 unsorted/
 web/db.sqlite3
+data/jsons/
+data/images/temp_image_store
