@@ -1,3 +1,6 @@
+import sys
+sys.path.insert(0,'.')
+
 import numpy as np
 from fastapi import FastAPI,Request,File, UploadFile
 from pydantic import BaseModel
@@ -16,9 +19,9 @@ from fastapi.templating import Jinja2Templates
 import PIL as Image
 
 
-import sys
-sys.path.insert(0,'.')
-from constants import IMG_SIZE
+from handle_files.json_files import read_json
+
+from constants import IMG_SIZE, WARD_BASE_URL
 # from get_data.get_links import get_page
 # from election_analysis.constants import IMG_SIZE
 # from get_data.get_links import scrap_elections
@@ -49,6 +52,34 @@ async def root(request:Request):
     return templates.TemplateResponse("index.html", {"request": request,
                                                     "id": id})
 
+
+@app.get("/elections")
+# File:UploadFile = UploadFile(...) 
+def get_election_data(action:str,local:str=None):
+    data = None
+    local = local.replace("%"," ") if local !=None else local
+    print(local)
+    if action == "first_data":
+        data = read_json('first_data.json')
+    if action == 'get_ward':
+        mapper = read_json('mapper.json')
+        *_,state = local.split('-')
+        data = mapper['states'][state][local]
+    
+    return data
+
+
+@app.get("/results/{election_type_id}/{local_govt}/{ward}")
+# File:UploadFile = UploadFile(...) 
+def get_results(election_type_id,local_govt,ward):
+    local_govt = local_govt.replace("%"," ") 
+    ward = ward.replace("%"," ") 
+    mapper = read_json('mapper.json')
+    lg_id = mapper['lgs'][local_govt]
+    ward_id = mapper['wards'][ward]
+    ward_link = f'{WARD_BASE_URL}/{election_type_id}/context/pus/lga/{lg_id}/ward/{ward_id}'
+    
+    return ward_link
 
 @app.post("/classify")
 # File:UploadFile = UploadFile(...) 

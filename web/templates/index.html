@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
     <head>
         <meta charset="utf-8">
@@ -16,19 +12,38 @@
     <body>
 
         <form action="" method="post">
-            <label for="election_type">Election Type</label>
-            <select name="" id="">
-           <option value=""></option>
-           <option value=""></option>
-           <option value=""></option>
-           <option value=""></option>
+            <label id="election_type_label" for="election_type">Election Type</label>
+            <select  id="election_type" name="election_type" >
             </select>
 
+            <label id="states_label" for="states_type">State</label>
+            <select  id="states" name="states" >
+            </select>
+
+            <label id="Constituency_label" for="Constituency">Constituency</label>
+            <select  id="constituency" name="Constituency" >
+            </select>
+
+            <label id="date_label" for="">Date</label>
+            <select  id="date" name="date" >
+            </select>
+
+            <label id="local_govt_label" for="local_govt">Local Government</label>
+            <select  id="local_govt" name="local_govt" >
+            </select>
+
+            <label id="ward_label" for="ward">Ward</label>
+            <select  id="ward" name="ward" >
+            </select>
+
+            <label id="polling_unit_label" for="">Polling Unit</label>
+            <select  id="polling_unit" name="polling_unit" >
+            </select>
+            <button id="get_results">Get Results</button>
         </form>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
         
+        <script src="{{ url_for('static', path='/javascript/helpers.js') }}" ></script>
+        <script src="{{ url_for('static', path='/javascript/state.js') }}" ></script>
         <script src="{{ url_for('static', path='/javascript/index.js') }}" async defer></script>
     </body>
 </html>

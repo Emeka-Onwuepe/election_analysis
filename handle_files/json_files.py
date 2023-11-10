@@ -1,7 +1,7 @@
 import json
 
 
-base = '/data/json'
+base = './data/json'
 
 def get_location(name):
     return f"{base}/{name}"
